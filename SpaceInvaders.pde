@@ -1,15 +1,19 @@
 Ship ship;
 Alien alien;
+Bullet bullet;
 void setup()
 {
   size(400, 400);
   ship = new Ship();
   alien = new Alien();
+  bullet = new Bullet(50,50, 10);
 }
 
 void draw()
 {
-  
+  ship.act();
+  alien.act();
+  bullet.act();
 }
 public class Ship
 {
@@ -23,19 +27,19 @@ public class Ship
   }
   
   //accessor methods
-  void getScalefactor()
+  int getScalefactor()
   {
-    
+    return scaleFactor;
   }
   
-  void getcx()
+  int getcx()
   {
-    
+    return cx;
   }
   
-  void getcy()
+  int getcy()
   {
-    
+    return cy;
   }
   
   //modifier methods
@@ -44,15 +48,21 @@ public class Ship
     
   }
   
-  void setcx()
+  void setcx(int cxIn)
   {
-    
+    cx = cxIn;
   }
   
-  void setcy()
+  void setcy(int cyIn)
   {
-    
+    cy = cyIn;
   }
+  
+  void setScaleFactor(int scaleFactorIn)
+  {
+    scaleFactor = scaleFactorIn;
+  }
+  //draws the ship
   void drawShip()
 {
   background(255);
@@ -84,16 +94,18 @@ line(cx + (2 * scaleFactor), cy + (2 * scaleFactor), cx + (5 * scaleFactor), cy 
 line(cx + (5 * scaleFactor), cy + (5 * scaleFactor), cx + (1 * scaleFactor), cy + (5 * scaleFactor));
 line(cx + (1 * scaleFactor), cy + (5 * scaleFactor), cx, cy + (3 * scaleFactor));
 }
+
+//act method triggers every draw cycle. controls the behavior of ship.
 void act()
 {
-  
+  drawShip();
 }
 }
 public class Alien
 {
-  int cx = 200;
-  int cy = 200;
-  int alienScaleFactor = 10;
+  private int cx = 200;
+  private int cy = 200;
+  private int scaleFactor = 10;
   //Alien constructor
   public Alien()
   {
@@ -101,62 +113,109 @@ public class Alien
   }
   
   //accessor methods
-  void getcx()
+  int getcx()
   {
-    
+   return cx; 
   }
   
-  void getcy()
+  int getcy()
   {
-    
+    return cy;
   }
   
-  void getScaleFactor()
+  int getScaleFactor()
   {
-    
+    return scaleFactor;
   }
   
   //modifier methods
+  void setScaleFactor(int scaleFactorIn)
+  {
+    scaleFactor = scaleFactorIn;
+  }
+  
+  void setcx(int cxIn)
+  {
+    cx = cxIn;
+  }
+  
+  void setcy(int cyIn)
+  {
+    cy = cyIn;
+  }
+  
   void drawAlien()
   {
     //draw alien
 //draw dome on ship
-triangle(cx - (alienScaleFactor * 3), cy - (1 * alienScaleFactor), cx, cy - (3 * alienScaleFactor), cx + (3 * alienScaleFactor), cy - (1 * alienScaleFactor));
+triangle(cx - (scaleFactor * 3), cy - (1 * scaleFactor), cx, cy - (3 * scaleFactor), cx + (3 * scaleFactor), cy - (1 * scaleFactor));
 //draw main body
-rect(cx - (3 * alienScaleFactor), cy - (1 * alienScaleFactor), 6 * alienScaleFactor, 3 * alienScaleFactor);
+rect(cx - (3 * scaleFactor), cy - (1 * scaleFactor), 6 * scaleFactor, 3 * scaleFactor);
 //draw left side
-line(cx - (3 * alienScaleFactor), cy + (2 * alienScaleFactor), cx - (4 * alienScaleFactor), cy + (2 * alienScaleFactor));
-line(cx - (4 * alienScaleFactor), cy + (2 * alienScaleFactor), cx - (5 * alienScaleFactor), cy + (3 * alienScaleFactor));
+line(cx - (3 * scaleFactor), cy + (2 * scaleFactor), cx - (4 * scaleFactor), cy + (2 * scaleFactor));
+line(cx - (4 * scaleFactor), cy + (2 * scaleFactor), cx - (5 * scaleFactor), cy + (3 * scaleFactor));
 //draw right side
-line(cx + (3 * alienScaleFactor), cy + (2 * alienScaleFactor), cx + (4 * alienScaleFactor), cy + (2 * alienScaleFactor));
-line(cx + (4 * alienScaleFactor), cy + (2 * alienScaleFactor), cx + (5 * alienScaleFactor), cy + (3 * alienScaleFactor));
+line(cx + (3 * scaleFactor), cy + (2 * scaleFactor), cx + (4 * scaleFactor), cy + (2 * scaleFactor));
+line(cx + (4 * scaleFactor), cy + (2 * scaleFactor), cx + (5 * scaleFactor), cy + (3 * scaleFactor));
 //draw bottom
-line(cx - (5 * alienScaleFactor), cy + (3 * alienScaleFactor), cx + (5 * alienScaleFactor), cy + (3 * alienScaleFactor));
+line(cx - (5 * scaleFactor), cy + (3 * scaleFactor), cx + (5 * scaleFactor), cy + (3 * scaleFactor));
 //draw filler lines
-line(cx + (3 * alienScaleFactor), cy - (1 * alienScaleFactor), cx + (2 * alienScaleFactor), cy + (2 * alienScaleFactor));
-line(cx + (2 * alienScaleFactor), cy - (1 * alienScaleFactor), cx + (1 * alienScaleFactor), cy + (2 * alienScaleFactor));
-line(cx + (1 * alienScaleFactor), cy - (1 * alienScaleFactor), cx, cy + (2 * alienScaleFactor));
-line(cx, cy - (1 * alienScaleFactor), cx - (1 * alienScaleFactor), cy + (2 * alienScaleFactor));
-line(cx - (1 * alienScaleFactor), cy - (1 * alienScaleFactor), cx - (2 * alienScaleFactor), cy + (2 * alienScaleFactor));
-line(cx - (2 * alienScaleFactor), cy - (1 * alienScaleFactor), cx - (3 * alienScaleFactor), cy + (2 * alienScaleFactor));
+line(cx + (3 * scaleFactor), cy - (1 * scaleFactor), cx + (2 * scaleFactor), cy + (2 * scaleFactor));
+line(cx + (2 * scaleFactor), cy - (1 * scaleFactor), cx + (1 * scaleFactor), cy + (2 * scaleFactor));
+line(cx + (1 * scaleFactor), cy - (1 * scaleFactor), cx, cy + (2 * scaleFactor));
+line(cx, cy - (1 * scaleFactor), cx - (1 * scaleFactor), cy + (2 * scaleFactor));
+line(cx - (1 * scaleFactor), cy - (1 * scaleFactor), cx - (2 * scaleFactor), cy + (2 * scaleFactor));
+line(cx - (2 * scaleFactor), cy - (1 * scaleFactor), cx - (3 * scaleFactor), cy + (2 * scaleFactor));
   }
   
   void act()
   {
-    
+    drawAlien();
   }
 }
 
 public class Bullet
 {
-  int cx = 0;
-  int cy = 0;
-  int scaleFactor = 10;
-  public Bullet()
+  private int cx = 0;
+  private int cy = 0;
+  private int scaleFactor = 10;
+  public Bullet(int cxIn, int cyIn, int scaleFactorIn)
   {
-    
+    cx = cxIn;
+    cy = cyIn;
+    scaleFactor = scaleFactorIn;
+  }
+  //accessor methods
+  int getcx()
+  {
+    return cx;
   }
   
+  int getcy()
+  {
+    return cy;
+  }
+  
+  int getScaleFactor()
+  {
+    return scaleFactor;
+  }
+  
+  //modifier methods
+  void setcx(int cxIn)
+  {
+    cx = cxIn;
+  }
+  
+  void setcy(int cyIn)
+  {
+    cy = cyIn;
+  }
+  
+  void setScaleFactor(int scaleFactorIn)
+  {
+    scaleFactor = scaleFactorIn;
+  }
   void drawBullet()
   {
     rect(cx - (1 * scaleFactor), cy - (2 * scaleFactor), 1 * scaleFactor, 4 * scaleFactor);
@@ -164,7 +223,7 @@ public class Bullet
   
   void act()
   {
-    
+    drawBullet();
   }
 }
 
