@@ -1,25 +1,25 @@
 Ship ship;
 Alien alien;
-Bullet bullet;
+SpawnDirector director;
 void setup()
 {
   size(400, 400);
   ship = new Ship();
   alien = new Alien();
-  bullet = new Bullet(50,50, 10);
+  director = new SpawnDirector();
 }
 
 void draw()
 {
   ship.act();
   alien.act();
-  bullet.act();
 }
 public class Ship
 {
   private int scaleFactor = 10;
   private int cx = 200;
   private int cy = 200;
+  private int lives = 3;
   
   public Ship()
   {
@@ -27,6 +27,11 @@ public class Ship
   }
   
   //accessor methods
+  int getLives()
+  {
+    return lives;
+  }
+  
   int getScalefactor()
   {
     return scaleFactor;
@@ -42,10 +47,10 @@ public class Ship
     return cy;
   }
   
-  //modifier methods
-  void setScaleFactor()
+  //modifer methods
+  void setLives(int livesIn)
   {
-    
+    lives = livesIn;
   }
   
   void setcx(int cxIn)
@@ -95,12 +100,21 @@ line(cx + (5 * scaleFactor), cy + (5 * scaleFactor), cx + (1 * scaleFactor), cy 
 line(cx + (1 * scaleFactor), cy + (5 * scaleFactor), cx, cy + (3 * scaleFactor));
 }
 
+//fire method
+void fire()
+{
+  Bullet leftBullet = new Bullet(cx - 3, cy, 10);
+  Bullet rightBullet = new Bullet(cx + 3, cy, 10);
+  leftBullet.act();
+  rightBullet.act();
+}
 //act method triggers every draw cycle. controls the behavior of ship.
 void act()
 {
   drawShip();
 }
 }
+
 public class Alien
 {
   private int cx = 200;
@@ -179,6 +193,7 @@ public class Bullet
   private int cx = 0;
   private int cy = 0;
   private int scaleFactor = 10;
+  private int speed = 0;
   public Bullet(int cxIn, int cyIn, int scaleFactorIn)
   {
     cx = cxIn;
@@ -186,6 +201,11 @@ public class Bullet
     scaleFactor = scaleFactorIn;
   }
   //accessor methods
+  int getSpeed()
+  {
+    return speed;
+  }
+  
   int getcx()
   {
     return cx;
@@ -202,6 +222,11 @@ public class Bullet
   }
   
   //modifier methods
+  void setSpeed(int speedIn)
+  {
+    speed = speedIn;
+  }
+  
   void setcx(int cxIn)
   {
     cx = cxIn;
@@ -218,7 +243,7 @@ public class Bullet
   }
   void drawBullet()
   {
-    rect(cx - (1 * scaleFactor), cy - (2 * scaleFactor), 1 * scaleFactor, 4 * scaleFactor);
+    rect(cx - (1 * scaleFactor), cy - (2 * scaleFactor), 1 * scaleFactor, 1 * scaleFactor);
   }
   
   void act()
@@ -227,3 +252,98 @@ public class Bullet
   }
 }
 
+
+public class SpawnDirector
+{
+  private int spawnTimer = 0;
+  private int killTimer = 0;
+  private int killFrequency = 0;
+  
+  ArrayList<Alien> aliens = new ArrayList<Alien>();
+  
+  //accessor methods
+  int getSpawnTimer()
+  {
+    return spawnTimer;
+  }
+  
+  int getKillTimer()
+  {
+    return killTimer;
+  }
+  
+  int getKillFrequency()
+  {
+    return killFrequency;
+  }
+  
+  //modifier methods
+  void setSpawnTimer(int spawnTimerIn)
+  {
+    spawnTimer = spawnTimerIn;
+  }
+  
+  void setKillTimer(int killTimerIn)
+  {
+    killTimer = killTimerIn;
+  }
+  
+  void setKillFrequency(int killFrequencyIn)
+  {
+    killFrequency = killFrequencyIn;
+  }
+  
+  //constructor
+  public SpawnDirector()
+  {
+    
+  }
+}
+
+public class ParticleDirector
+{
+  private int effectDuration = 0;
+  private int particleCount = 0;
+  
+  //accessor methods
+  int getEffectDuration()
+  {
+    return effectDuration;
+  }
+  
+  int getParticleCount()
+  {
+    return effectDuration;
+  }
+  
+  //modifier methods
+  void setEffectDuration(int effectDurationIn)
+  {
+    effectDuration = effectDurationIn;
+  }
+  
+  void setParticleCount(int particleCountIn)
+  {
+    particleCount = particleCountIn;
+  }
+  
+  //constructor
+  public ParticleDirector()
+  {
+    
+  }
+  
+  void applyEffect(int xIn, int yIn)
+  {
+    
+  }
+  
+}
+
+public class Particle
+{
+  public Particle()
+  {
+    
+  }
+}
