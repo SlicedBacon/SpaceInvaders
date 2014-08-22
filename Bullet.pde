@@ -4,6 +4,7 @@ public class Bullet
   private int cy = 0;
   private int scaleFactor = 10;
   private int speed = 0;
+  private boolean collided = false;
   public Bullet(int cxIn, int cyIn, int scaleFactorIn)
   {
     cx = cxIn;
@@ -56,8 +57,21 @@ public class Bullet
     rect(cx - (1 * scaleFactor), cy - (2 * scaleFactor), 1 * scaleFactor, 1 * scaleFactor);
   }
   
+  
+  boolean collided()
+  {
+    if(collided == true)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
   void act()
   {
     drawBullet();
+    cy -= 1;
   }
 }

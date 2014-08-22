@@ -49,6 +49,7 @@ public class SpawnDirector
   {
    spawnTimer = spawnTimerIn;
   }
+  
   void act()
   {
     for(int x = 0; x <= spawnTimer; x++)

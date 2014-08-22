@@ -54,7 +54,6 @@ public class Ship
   //draws the ship
   void drawShip()
 {
-  background(255);
   //draw fighter
   
   //cockpit
@@ -84,14 +83,6 @@ line(cx + (5 * scaleFactor), cy + (5 * scaleFactor), cx + (1 * scaleFactor), cy 
 line(cx + (1 * scaleFactor), cy + (5 * scaleFactor), cx, cy + (3 * scaleFactor));
 }
 
-//fire method
-void fire()
-{
-  Bullet leftBullet = new Bullet(cx - 3, cy, 10);
-  Bullet rightBullet = new Bullet(cx + 3, cy, 10);
-  leftBullet.act();
-  rightBullet.act();
-}
 //act method triggers every draw cycle. controls the behavior of ship.
 void act()
 {
