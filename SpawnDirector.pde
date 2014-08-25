@@ -4,8 +4,6 @@ public class SpawnDirector
   private int killTimer = 0;
   private int killFrequency = 0;
   
-  ArrayList<Alien> aliens = new ArrayList<Alien>();
-  
   //accessor methods
   int getSpawnTimer()
   {
@@ -52,9 +50,12 @@ public class SpawnDirector
   
   void act()
   {
-    for(int x = 0; x <= spawnTimer; x++)
+    spawnTimer -= 1;
+    if(spawnTimer <= 0)
     {
-      
+      Alien alien = new Alien((int) (Math.random() * width), 0);
+      aliens.add(alien);
+      spawnTimer = alienSpawnRate;
     }
   }
 }

@@ -3,9 +3,16 @@ public class Alien
   private int cx = 200;
   private int cy = 200;
   private int scaleFactor = 10;
-  //Alien constructor
+  //Alien constructors
   public Alien()
   {
+    
+  }
+  
+  public Alien(int cxIn, int cyIn)
+  {
+    cx = cxIn;
+    cy = cyIn;
     
   }
   
@@ -65,8 +72,22 @@ line(cx - (1 * scaleFactor), cy - (1 * scaleFactor), cx - (2 * scaleFactor), cy 
 line(cx - (2 * scaleFactor), cy - (1 * scaleFactor), cx - (3 * scaleFactor), cy + (2 * scaleFactor));
   }
   
+  void moveTowardsShip()
+  {
+    //moves toward the ship under the appropriat conditions
+    if(ship.getcx() < cx)
+    {
+      cx -= 1;
+    }
+    if(ship.getcx() > cx)
+    {
+      cx += 1;
+    }
+  }
   void act()
   {
     drawAlien();
+    moveTowardsShip();
+    cy += 1;
   }
 }

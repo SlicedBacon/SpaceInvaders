@@ -72,6 +72,6 @@ public class Bullet
   void act()
   {
     drawBullet();
-    cy -= 1;
+    cy -= 10;
   }
 }
