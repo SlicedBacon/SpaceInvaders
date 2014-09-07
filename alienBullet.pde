@@ -1,4 +1,4 @@
-public class Bullet
+public class AlienBullet
 {
   private int cx = 0;
   private int cy = 0;
@@ -6,7 +6,7 @@ public class Bullet
   private int speed = 0;
   private int collisionRadius = 10;
   private boolean collided = false;
-  public Bullet(int cxIn, int cyIn, int scaleFactorIn)
+  public AlienBullet(int cxIn, int cyIn, int scaleFactorIn)
   {
     cx = cxIn;
     cy = cyIn;
@@ -84,6 +84,6 @@ public class Bullet
   void act()
   {
     drawBullet();
-    cy -= 10;
+    cy += 10;
   }
 }

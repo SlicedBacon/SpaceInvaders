@@ -3,6 +3,8 @@ public class Alien
   private int cx = 200;
   private int cy = 200;
   private int scaleFactor = 10;
+  private int collisionRadius = 25;
+  private int fireTimer = 50;
   //Alien constructors
   public Alien()
   {
@@ -17,6 +19,11 @@ public class Alien
   }
   
   //accessor methods
+  int getCollisionRadius()
+  {
+    return collisionRadius;
+  }
+  
   int getcx()
   {
    return cx; 
@@ -33,6 +40,11 @@ public class Alien
   }
   
   //modifier methods
+  void setCollisionRadius(int collisionRadiusIn)
+  {
+    collisionRadius = collisionRadiusIn;
+  }
+  
   void setScaleFactor(int scaleFactorIn)
   {
     scaleFactor = scaleFactorIn;
@@ -84,10 +96,22 @@ line(cx - (2 * scaleFactor), cy - (1 * scaleFactor), cx - (3 * scaleFactor), cy 
       cx += 1;
     }
   }
+  
+  void fire()
+  {
+    AlienBullet alienBullet = new AlienBullet(cx, cy, 10);
+    alienBullets.add(alienBullet);
+  }
   void act()
   {
+    fireTimer -= 1;
     drawAlien();
     moveTowardsShip();
+    if(fireTimer <= 0)
+    {
+      fire();
+      fireTimer = 50;
+    }
     cy += 1;
   }
 }

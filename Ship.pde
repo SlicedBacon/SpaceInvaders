@@ -2,8 +2,9 @@ public class Ship
 {
   private int scaleFactor = 10;
   private int cx = 200;
-  private int cy = 200;
+  private int cy = 375;
   private int lives = 3;
+  private int collisionRadius = 25;
   
   public Ship()
   {
@@ -11,6 +12,11 @@ public class Ship
   }
   
   //accessor methods
+  int getCollisionRadius()
+  {
+    return collisionRadius;
+  }
+  
   int getLives()
   {
     return lives;
@@ -32,6 +38,11 @@ public class Ship
   }
   
   //modifer methods
+  void setCollisionRadius(int collisionRadiusIn)
+  {
+    collisionRadius = collisionRadiusIn;
+  }
+  
   void setLives(int livesIn)
   {
     lives = livesIn;
@@ -86,6 +97,7 @@ line(cx + (1 * scaleFactor), cy + (5 * scaleFactor), cx, cy + (3 * scaleFactor))
 //act method triggers every draw cycle. controls the behavior of ship.
 void act()
 {
+  cx = mouseX;
   drawShip();
 }
 }
