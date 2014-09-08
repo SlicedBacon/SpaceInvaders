@@ -9,8 +9,8 @@ int score = 0;
 boolean gameOver = false;
 void setup()
 {
-  background(255);
-  size(400, 400);
+  background(000);
+  size(600, 800);
   ship = new Ship();
   director = new SpawnDirector(alienSpawnRate);
 }
@@ -19,7 +19,7 @@ void draw()
 {
   if(gameOver == false)
   {
-  background(255);
+  background(000);
   
   ship.act();
   director.act();
@@ -133,13 +133,14 @@ boolean checkAlienBulletHit(Ship ship, AlienBullet alienBullet)
 
 void gameOver()
 {
-  textSize(50);
-  fill(0, 0, 0);
-  text("Score: " + score, 100, 100);
+  ship.switchCanDraw();
   director.switchCanSpawn();
   aliens.clear();
   alienBullets.clear();
   bullets.clear();
   System.out.println(score);
   gameOver = true;
+  textSize(50);
+  fill(255, 255, 255);
+  text("Score: " + score, 100, 100);
 }
